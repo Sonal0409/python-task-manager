@@ -23,7 +23,12 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
     )
     if test_config:
         app.config.update(test_config)
-    database.initialize_database(app.config["DATABASE"])
+    database_path, database_anchor = database.initialize_database(
+        app.config["DATABASE"]
+    )
+    app.config["DATABASE"] = database_path
+    if database_anchor is not None:
+        app.extensions["task_database_anchor"] = database_anchor
 
     @app.after_request
     def add_cors_headers(response: Any) -> Any:

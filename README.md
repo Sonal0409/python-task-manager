@@ -14,7 +14,7 @@ The API listens on `http://127.0.0.1:5000`. The frontend calls the API at that a
 
 ## Requirements
 
-- Python 3.9 or later
+- Python 3.10 or later
 - pip
 - A modern web browser
 

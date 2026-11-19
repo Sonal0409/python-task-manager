@@ -48,6 +48,15 @@ def test_create_task_rejects_non_object_json(client):
     assert response.status_code == 400
 
 
+def test_create_task_accepts_maximum_title_length(client):
+    response = client.post("/api/tasks", json={"title": "x" * 200})
+    assert response.status_code == 201
+    assert len(response.get_json()["task"]["title"]) == 200
+
+    too_long = client.post("/api/tasks", json={"title": "x" * 201})
+    assert too_long.status_code == 400
+
+
 def test_update_task_fields_and_reject_missing_id(client):
     task_id = client.post("/api/tasks", json={"title": "Draft"}).get_json()["task"]["id"]
 
@@ -80,3 +89,15 @@ def test_delete_task_and_missing_id(client):
 
     missing = client.delete(f"/api/tasks/{task_id}")
     assert missing.status_code == 404
+
+
+def test_in_memory_database_persists_across_requests():
+    app = create_app({"TESTING": True, "DATABASE": ":memory:"})
+    client = app.test_client()
+
+    created = client.post("/api/tasks", json={"title": "Keep in memory"})
+    assert created.status_code == 201
+
+    listing = client.get("/api/tasks")
+    assert listing.status_code == 200
+    assert listing.get_json()["tasks"][0]["title"] == "Keep in memory"
