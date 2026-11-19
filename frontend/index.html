@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <title>Taskflow — Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="brand" href="#" aria-label="Taskflow home">
+          <span class="brand-mark" aria-hidden="true">T</span>
+          <span>taskflow</span>
+        </a>
+        <div class="nav-label">WORKSPACE</div>
+        <a class="nav-item active" href="#tasks" aria-current="page">
+          <span class="nav-icon" aria-hidden="true">▦</span>
+          <span>My tasks</span>
+        </a>
+        <div class="sidebar-note">
+          <span class="note-icon" aria-hidden="true">✦</span>
+          <p>A little progress each day adds up to big results.</p>
+        </div>
+        <div class="sidebar-footer">
+          <span class="avatar" aria-hidden="true">TF</span>
+          <span><strong>My workspace</strong><small>Personal plan</small></span>
+        </div>
+      </aside>
+
+      <main class="main-content" id="tasks">
+        <header class="topbar">
+          <div class="breadcrumb"><span>Workspace</span><span aria-hidden="true">/</span><strong>My tasks</strong></div>
+          <div class="topbar-date" id="today-date"></div>
+        </header>
+
+        <section class="page-heading" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow">YOUR WORKSPACE</p>
+            <h1 id="page-title">My tasks <span class="wave" aria-hidden="true">✦</span></h1>
+            <p class="page-subtitle">Keep track of what matters and make today count.</p>
+          </div>
+        </section>
+
+        <section class="summary-grid" aria-label="Task summary">
+          <article class="summary-card">
+            <div class="summary-icon total-icon" aria-hidden="true">▤</div>
+            <div><p>Total tasks</p><strong id="total-count">—</strong></div>
+            <span class="summary-caption">in your workspace</span>
+          </article>
+          <article class="summary-card">
+            <div class="summary-icon progress-icon" aria-hidden="true">◷</div>
+            <div><p>In progress</p><strong id="progress-count">—</strong></div>
+            <span class="summary-caption">keep it moving</span>
+          </article>
+          <article class="summary-card">
+            <div class="summary-icon done-icon" aria-hidden="true">✓</div>
+            <div><p>Completed</p><strong id="done-count">—</strong></div>
+            <span class="summary-caption">look at you go</span>
+          </article>
+        </section>
+
+        <section class="tasks-panel" aria-labelledby="tasks-heading">
+          <div class="panel-heading">
+            <div>
+              <h2 id="tasks-heading">Task list</h2>
+              <p>Everything you need to get done.</p>
+            </div>
+            <label class="filter-wrap" for="status-filter">
+              <span class="visually-hidden">Filter tasks by status</span>
+              <select id="status-filter">
+                <option value="all">All tasks</option>
+                <option value="todo">To do</option>
+                <option value="in_progress">In progress</option>
+                <option value="done">Completed</option>
+              </select>
+            </label>
+          </div>
+
+          <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+          <div id="task-list" class="task-list" aria-live="polite">
+            <div class="state-message"><span class="spinner" aria-hidden="true"></span><span>Loading your tasks…</span></div>
+          </div>
+        </section>
+
+        <section class="create-panel" aria-labelledby="create-heading">
+          <div class="create-heading">
+            <div class="create-icon" aria-hidden="true">＋</div>
+            <div><h2 id="create-heading">Add a new task</h2><p>Capture it now, tackle it when you're ready.</p></div>
+          </div>
+          <form id="task-form">
+            <div class="form-row">
+              <label class="field title-field">
+                <span>Task title <span class="required">*</span></span>
+                <input id="task-title" name="title" type="text" maxlength="200" placeholder="e.g. Prepare weekly project update" required>
+              </label>
+            </div>
+            <label class="field">
+              <span>Description <span class="optional">(optional)</span></span>
+              <textarea id="task-description" name="description" rows="3" maxlength="2000" placeholder="Add a few details to help you get started…"></textarea>
+            </label>
+            <div class="form-actions">
+              <span class="form-hint">You can update the status anytime.</span>
+              <button class="primary-button" type="submit"><span aria-hidden="true">＋</span> Create task</button>
+            </div>
+          </form>
+        </section>
+        <footer class="page-footer">Small steps. Big momentum. <span aria-hidden="true">✦</span></footer>
+      </main>
+    </div>
+  </body>
+</html>
