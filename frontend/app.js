@@ -42,8 +42,7 @@ function escapeHtml(value) {
 }
 
 function updateSummary() {
-  document.querySelector("#total-count").textContent =
-    tasks.filter((task) => task.status === "todo").length;
+  document.querySelector("#total-count").textContent = tasks.length;
   document.querySelector("#progress-count").textContent =
     tasks.filter((task) => task.status === "in_progress").length;
   document.querySelector("#done-count").textContent =
@@ -134,7 +133,7 @@ taskForm.addEventListener("submit", async (event) => {
 
   submitButton.disabled = true;
   try {
-    const data = await requestJson(`${API_URL}/create`, {
+    const data = await requestJson(API_URL, {
       method: "POST",
       body: JSON.stringify({ title, description: descriptionInput.value.trim() })
     });
