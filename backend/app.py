@@ -73,7 +73,7 @@ def create_app(test_config: dict[str, Any] | None = None) -> Flask:
         row = database.update_task(app.config["DATABASE"], task_id, values)
         if row is None:
             return jsonify(error="Task not found."), 404
-        return jsonify(task=Task.from_row(row).to_dict()), 200
+        return jsonify(task=Task.from_row(row).to_json()), 200
 
     @app.delete("/api/tasks/<int:task_id>")
     def remove_task(task_id: int) -> Any:

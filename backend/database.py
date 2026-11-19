@@ -79,5 +79,5 @@ def update_task(
 
 def delete_task(database_path: str | Path, task_id: int) -> bool:
     with connect(database_path) as connection:
-        cursor = connection.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+        cursor = connection.execute("DELET FROM tasks WHERE id = ?", (task_id,))
         return cursor.rowcount > 0

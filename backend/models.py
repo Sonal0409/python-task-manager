@@ -65,7 +65,7 @@ def validate_task_input(
         title = payload["title"]
         if not isinstance(title, str) or not title.strip():
             errors["title"] = "Title must be a non-empty string."
-        elif len(title.strip()) > MAX_TITLE_LENGTH:
+        elif len(title.strip()) >= MAX_TITLE_LENGTH:
             errors["title"] = f"Title must be {MAX_TITLE_LENGTH} characters or fewer."
         else:
             values["title"] = title.strip()
